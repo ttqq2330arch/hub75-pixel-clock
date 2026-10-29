@@ -1,0 +1,219 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-25T14:29:58",
+    "ignored_checks": [
+        {
+            "description": "Footprint has no courtyard defined",
+            "key": "missing_courtyard"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "key": "track_not_centered_on_via"
+        },
+        {
+            "description": "Tuning profile track geometries",
+            "key": "tuning_profile_track_geometries"
+        },
+        {
+            "description": "Footprint doesn't match symbol's footprint filters",
+            "key": "footprint_filters_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads",
+            "key": "footprint_type_mismatch"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "10.0.6",
+    "schematic_parity": [],
+    "source": "hub75-adapter-routed.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "填充区[GND]在 B.Cu 上, 优先级 0",
+                    "pos": {
+                        "x": 0.5,
+                        "y": 0.5
+                    },
+                    "uuid": "263a4920-26a6-49bb-9ac9-03f84c881f9d"
+                },
+                {
+                    "description": "J3 的PTH 焊盘 1 [GND]",
+                    "pos": {
+                        "x": 25.13,
+                        "y": 1.8794
+                    },
+                    "uuid": "c1b6942d-9ad9-4009-a81e-00b987b66732"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "缓释热焊盘 (花焊盘) 与填充区的连接不完整 (层 B.Cu; 填充区 最小引线数量 2; 实际 1)",
+            "items": [
+                {
+                    "description": "填充区[GND]在 B.Cu 上, 优先级 0",
+                    "pos": {
+                        "x": 0.5,
+                        "y": 0.5
+                    },
+                    "uuid": "263a4920-26a6-49bb-9ac9-03f84c881f9d"
+                },
+                {
+                    "description": "J3 的PTH 焊盘 1 [GND]",
+                    "pos": {
+                        "x": 25.13,
+                        "y": 1.8794
+                    },
+                    "uuid": "c1b6942d-9ad9-4009-a81e-00b987b66732"
+                }
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 J5",
+                    "pos": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "uuid": "12c31f49-dcf9-4439-ad38-e04cbb761b03"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 J3",
+                    "pos": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "uuid": "15c034f5-3300-4cc5-94ba-4b37b0789058"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 H4",
+                    "pos": {
+                        "x": 41.0,
+                        "y": 52.4
+                    },
+                    "uuid": "30dffa64-f5c6-4b94-8241-0439c8869457"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 J2",
+                    "pos": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "uuid": "58048b5c-5eb7-4c93-b3b9-40ffcfc16dcc"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 J4",
+                    "pos": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "uuid": "6783f135-2f11-48a0-89ba-b12857f5242d"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 J1",
+                    "pos": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "uuid": "a9143744-1144-48b9-ad10-5ca06387b67d"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 H2",
+                    "pos": {
+                        "x": 41.0,
+                        "y": 2.8
+                    },
+                    "uuid": "ad8bd38d-d711-47a1-8a62-182f14d6dd92"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 H1",
+                    "pos": {
+                        "x": 27.9,
+                        "y": 2.8
+                    },
+                    "uuid": "d2b07ea2-d854-4750-881d-cf2abb8906a9"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 H3",
+                    "pos": {
+                        "x": 27.9,
+                        "y": 52.4
+                    },
+                    "uuid": "ec830a39-a613-4f9f-beda-30f32c39b85f"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        }
+    ]
+}

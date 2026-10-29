@@ -1,0 +1,196 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-25T18:11:49",
+    "ignored_checks": [
+        {
+            "description": "Footprint has no courtyard defined",
+            "key": "missing_courtyard"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "key": "track_not_centered_on_via"
+        },
+        {
+            "description": "Tuning profile track geometries",
+            "key": "tuning_profile_track_geometries"
+        },
+        {
+            "description": "Footprint doesn't match symbol's footprint filters",
+            "key": "footprint_filters_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads",
+            "key": "footprint_type_mismatch"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "10.0.6",
+    "schematic_parity": [],
+    "source": "hub75-adapter-routed.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "走线 [3V3] (F.Cu), 长度: 2.5400 mm",
+                    "pos": {
+                        "x": 2.27,
+                        "y": 4.4194
+                    },
+                    "uuid": "eb691037-e57e-4b57-b7de-bc658e7f2451"
+                },
+                {
+                    "description": "J4 的PTH 焊盘 1 [3V3]",
+                    "pos": {
+                        "x": 27.4,
+                        "y": 5.6
+                    },
+                    "uuid": "fe99d40f-8152-4df4-aba7-7020081a51c6"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 H2",
+                    "pos": {
+                        "x": 41.0,
+                        "y": 2.8
+                    },
+                    "uuid": "0637d79b-087a-4db8-be9e-9dc3d51e78d8"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 J4",
+                    "pos": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "uuid": "0c033949-790a-4f00-b8dc-e4fad78fb5d8"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 J3",
+                    "pos": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "uuid": "0cb46478-b608-4b3b-9429-ad0c96c3eced"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 H1",
+                    "pos": {
+                        "x": 27.9,
+                        "y": 2.8
+                    },
+                    "uuid": "589637fd-3bbc-4cc1-84f6-d2770a5f9840"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 J5",
+                    "pos": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "uuid": "b40dd573-606d-49db-993c-c12ab6f7a945"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 J1",
+                    "pos": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "uuid": "e5eeeb9a-1a9a-43a4-b489-981ac7f1be94"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 H4",
+                    "pos": {
+                        "x": 41.0,
+                        "y": 52.4
+                    },
+                    "uuid": "e86ea892-2f75-4669-82f6-9be62787fe91"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 J2",
+                    "pos": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "uuid": "e8b26646-8fcf-40b3-8716-6806f10448d4"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 H3",
+                    "pos": {
+                        "x": 27.9,
+                        "y": 52.4
+                    },
+                    "uuid": "f826f68c-5d60-4418-9235-448db3ce0c24"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        }
+    ]
+}

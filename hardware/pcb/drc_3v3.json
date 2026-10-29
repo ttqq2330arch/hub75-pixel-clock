@@ -1,0 +1,233 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-25T19:50:10",
+    "ignored_checks": [
+        {
+            "description": "Footprint has no courtyard defined",
+            "key": "missing_courtyard"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "key": "track_not_centered_on_via"
+        },
+        {
+            "description": "Tuning profile track geometries",
+            "key": "tuning_profile_track_geometries"
+        },
+        {
+            "description": "Footprint doesn't match symbol's footprint filters",
+            "key": "footprint_filters_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads",
+            "key": "footprint_type_mismatch"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.6",
+    "schematic_parity": [],
+    "source": "hub75-adapter-routed.kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "Items not allowed",
+            "items": [
+                {
+                    "description": "走线 [3V3] (F.Cu), 长度: 1.6702 mm",
+                    "pos": {
+                        "x": 21.719,
+                        "y": 4.419
+                    },
+                    "uuid": "56bdb0d1-9141-4ce9-a1f1-7a0c3e1b356f"
+                }
+            ],
+            "severity": "error",
+            "type": "items_not_allowed"
+        },
+        {
+            "description": "Items not allowed",
+            "items": [
+                {
+                    "description": "走线 [3V3] (F.Cu), 长度: 19.4490 mm",
+                    "pos": {
+                        "x": 2.27,
+                        "y": 4.419
+                    },
+                    "uuid": "a7215edb-6e98-4752-bb1a-28a06ee45b49"
+                }
+            ],
+            "severity": "error",
+            "type": "items_not_allowed"
+        },
+        {
+            "description": "不允许的项目 (keepout 域)",
+            "items": [
+                {
+                    "description": "过孔 [3V3] (F.Cu - B.Cu)",
+                    "pos": {
+                        "x": 22.9,
+                        "y": 5.6
+                    },
+                    "uuid": "b17267f7-a957-4a37-81a7-733b2db2848d"
+                }
+            ],
+            "severity": "error",
+            "type": "items_not_allowed"
+        },
+        {
+            "description": "Items not allowed",
+            "items": [
+                {
+                    "description": "走线 [3V3] (B.Cu), 长度: 4.5000 mm",
+                    "pos": {
+                        "x": 22.9,
+                        "y": 5.6
+                    },
+                    "uuid": "b9727969-bd9c-44b8-943f-75c7bd23180b"
+                }
+            ],
+            "severity": "error",
+            "type": "items_not_allowed"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 H2",
+                    "pos": {
+                        "x": 41.0,
+                        "y": 2.8
+                    },
+                    "uuid": "0637d79b-087a-4db8-be9e-9dc3d51e78d8"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 J4",
+                    "pos": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "uuid": "0c033949-790a-4f00-b8dc-e4fad78fb5d8"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 J3",
+                    "pos": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "uuid": "0cb46478-b608-4b3b-9429-ad0c96c3eced"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 H1",
+                    "pos": {
+                        "x": 27.9,
+                        "y": 2.8
+                    },
+                    "uuid": "589637fd-3bbc-4cc1-84f6-d2770a5f9840"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 J5",
+                    "pos": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "uuid": "b40dd573-606d-49db-993c-c12ab6f7a945"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 J1",
+                    "pos": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "uuid": "e5eeeb9a-1a9a-43a4-b489-981ac7f1be94"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 H4",
+                    "pos": {
+                        "x": 41.0,
+                        "y": 52.4
+                    },
+                    "uuid": "e86ea892-2f75-4669-82f6-9be62787fe91"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 J2",
+                    "pos": {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "uuid": "e8b26646-8fcf-40b3-8716-6806f10448d4"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        },
+        {
+            "description": "当前配置中不包含封装库 'hub75ad'",
+            "items": [
+                {
+                    "description": "封装 H3",
+                    "pos": {
+                        "x": 27.9,
+                        "y": 52.4
+                    },
+                    "uuid": "f826f68c-5d60-4418-9235-448db3ce0c24"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_issues"
+        }
+    ]
+}

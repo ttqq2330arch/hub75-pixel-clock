@@ -1,0 +1,43 @@
+# ---- Build & IDE ----
+.pio/
+.vscode/
+build/
+*.tmp
+__pycache__/
+*.pyc
+
+# ---- Logs ----
+*.log
+tools/*.txt
+
+# ---- Debug screenshots & binary assets (never publish) ----
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.zip
+*.tar.gz
+*.exe
+*.bin
+
+# ---- Personal / third-party data (NOT for public repo) ----
+# 10MB 个人表盘备份，含私有内容，绝不入库
+migration/
+# 收集来的第三方开源时钟固件，版权不属于本项目
+tools/dial_collection/
+# 已废弃的小程序工程
+miniprogram/
+# 动画素材帧（大二进制，按需单独管理）
+vframes/
+tools/cc0_batch/
+tools/clarice.zip
+tools/rainy.zip
+tools/mari0_*.png
+tools/mario_demo.gif
+tools/test_coin.gif
+
+# ---- 仓库清理：排除本地日志 / 临时 / 重复文件 ----
+build_log.txt
+/draw
+/操作手册.md
+

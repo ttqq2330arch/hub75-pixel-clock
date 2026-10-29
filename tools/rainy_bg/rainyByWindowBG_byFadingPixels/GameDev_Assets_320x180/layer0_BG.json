@@ -1,0 +1,407 @@
+{ "frames": [
+   {
+    "filename": "DarkFantasy_01_pixelAnim_0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_1.aseprite",
+    "frame": { "x": 320, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_2.aseprite",
+    "frame": { "x": 640, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_3.aseprite",
+    "frame": { "x": 960, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_4.aseprite",
+    "frame": { "x": 1280, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_5.aseprite",
+    "frame": { "x": 1600, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_6.aseprite",
+    "frame": { "x": 1920, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_7.aseprite",
+    "frame": { "x": 2240, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_8.aseprite",
+    "frame": { "x": 2560, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_9.aseprite",
+    "frame": { "x": 2880, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_10.aseprite",
+    "frame": { "x": 3200, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_11.aseprite",
+    "frame": { "x": 3520, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_12.aseprite",
+    "frame": { "x": 3840, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_13.aseprite",
+    "frame": { "x": 4160, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_14.aseprite",
+    "frame": { "x": 4480, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_15.aseprite",
+    "frame": { "x": 4800, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_16.aseprite",
+    "frame": { "x": 5120, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_17.aseprite",
+    "frame": { "x": 5440, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_18.aseprite",
+    "frame": { "x": 5760, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_19.aseprite",
+    "frame": { "x": 6080, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_20.aseprite",
+    "frame": { "x": 6400, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_21.aseprite",
+    "frame": { "x": 6720, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_22.aseprite",
+    "frame": { "x": 7040, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_23.aseprite",
+    "frame": { "x": 7360, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_24.aseprite",
+    "frame": { "x": 7680, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_25.aseprite",
+    "frame": { "x": 8000, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_26.aseprite",
+    "frame": { "x": 8320, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_27.aseprite",
+    "frame": { "x": 8640, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_28.aseprite",
+    "frame": { "x": 8960, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_29.aseprite",
+    "frame": { "x": 9280, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_30.aseprite",
+    "frame": { "x": 9600, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_31.aseprite",
+    "frame": { "x": 9920, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_32.aseprite",
+    "frame": { "x": 10240, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_33.aseprite",
+    "frame": { "x": 10560, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_34.aseprite",
+    "frame": { "x": 10880, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_35.aseprite",
+    "frame": { "x": 11200, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_36.aseprite",
+    "frame": { "x": 11520, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_37.aseprite",
+    "frame": { "x": 11840, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_38.aseprite",
+    "frame": { "x": 12160, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_39.aseprite",
+    "frame": { "x": 12480, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_40.aseprite",
+    "frame": { "x": 12800, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_41.aseprite",
+    "frame": { "x": 13120, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   },
+   {
+    "filename": "DarkFantasy_01_pixelAnim_42.aseprite",
+    "frame": { "x": 13440, "y": 0, "w": 320, "h": 180 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 320, "h": 180 },
+    "sourceSize": { "w": 320, "h": 180 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.7-x64",
+  "image": "layer0_BG.png",
+  "format": "RGBA8888",
+  "size": { "w": 13760, "h": 180 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "thunder struck", "from": 0, "to": 7, "direction": "forward", "color": "#000000ff" },
+   { "name": "main loop", "from": 8, "to": 41, "direction": "forward", "color": "#000000ff" }
+  ],
+  "layers": [
+   { "name": "background", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

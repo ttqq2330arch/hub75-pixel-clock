@@ -1,0 +1,14 @@
+# 16MB 专用分区表（ESP32-S3 N16R8）
+# 16MB Flash 分配：
+#   app0/app1   各 2MB   A/B 分区，支持 OTA 无缝升级
+#   faces       2MB      表盘存储区（M3 BLE 下发表盘用，8~32 个表盘包）
+#   nvs         NVS      连接凭据 / 亮度 / 表盘索引
+#   otadata     OTA 状态
+#   spiffs      剩余 ~10MB 备用（拓展资源包）
+# Name,    Type,  SubType, Offset,   Size,     Flags
+nvs,      data,  nvs,     0x9000,   0x5000,
+otadata,  data,  ota,     0xe000,   0x2000,
+app0,     app,   ota_0,   0x10000,  0x200000,
+app1,     app,   ota_1,   0x210000, 0x200000,
+faces,    0x40,  0x00,    0x420000, 0x200000,
+spiffs,   data,  spiffs,  0x620000, 0x9E0000,

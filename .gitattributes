@@ -1,0 +1,2 @@
+# 统一换行符为 LF，保证跨平台（Windows/macOS/Linux）clone 一致性
+* text=auto eol=lf

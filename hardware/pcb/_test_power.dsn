@@ -1,0 +1,251 @@
+(pcb "F:/AI数据/hub75-pixel-clock/hardware/pcb/_test_power.dsn"
+  (parser
+    (string_quote ")
+    (space_in_quoted_tokens on)
+    (host_cad "KiCad's Pcbnew")
+    (host_version "10.0.6")
+  )
+  (resolution um 10)
+  (unit um)
+  (structure
+    (layer F.Cu
+      (type signal)
+      (property
+        (index 0)
+      )
+    )
+    (layer B.Cu
+      (type signal)
+      (property
+        (index 1)
+      )
+    )
+    (boundary
+      (path pcb 0  41168.3 -2.36  41502.9 -40.057  41831.2 -114.977  42149 -226.178
+            42452.3 -372.261  42737.4 -551.39  43000.6 -761.311  43238.7 -999.385
+            43448.6 -1262.62  43627.7 -1547.7  43773.8 -1851.05  43885 -2168.84
+            43959.9 -2497.09  43997.6 -2831.66  44000 -3000  44000 -51500
+            43997.6 -51668.3  43959.9 -52002.9  43885 -52331.2  43773.8 -52649
+            43627.7 -52952.3  43448.6 -53237.4  43238.7 -53500.6  43000.6 -53738.7
+            42737.4 -53948.6  42452.3 -54127.7  42149 -54273.8  41831.2 -54385
+            41502.9 -54459.9  41168.3 -54497.6  41000 -54500  3000 -54500
+            2831.66 -54497.6  2497.09 -54459.9  2168.84 -54385  1851.05 -54273.8
+            1547.7 -54127.7  1262.62 -53948.6  999.385 -53738.7  761.311 -53500.6
+            551.39 -53237.4  372.261 -52952.3  226.178 -52649  114.977 -52331.2
+            40.057 -52002.9  2.36 -51668.3  0 -51500  0 -3000  2.36 -2831.66
+            40.057 -2497.09  114.977 -2168.84  226.178 -1851.05  372.261 -1547.7
+            551.39 -1262.62  761.311 -999.385  999.385 -761.311  1262.62 -551.39
+            1547.7 -372.261  1851.05 -226.178  2168.84 -114.977  2497.09 -40.057
+            2831.66 -2.36  3000 0  41000 0  41168.3 -2.36)
+    )
+    (via "Via[0-1]_600:300_um")
+    (rule
+      (width 200)
+      (clearance 200)
+      (clearance 50 (type smd_smd))
+    )
+  )
+  (placement
+    (component hub75ad:MountingHole_3.2mm
+      (place H2 41000 -2800 front 0 (PN MountingHole_3.2mm))
+      (place H4 41000 -52400 front 0 (PN MountingHole_3.2mm))
+      (place H3 27900 -52400 front 0 (PN MountingHole_3.2mm))
+      (place H1 27900 -2800 front 0 (PN MountingHole_3.2mm))
+    )
+    (component hub75ad:Socket_1x22_R
+      (place J3 0 0 front 0 (PN Socket_1x22_R))
+    )
+    (component hub75ad:PinHeader_1x3
+      (place J5 0 0 front 0 (PN PinHeader_1x3))
+    )
+    (component hub75ad:PinHeader_1x4
+      (place J4 0 0 front 0 (PN PinHeader_1x4))
+    )
+    (component hub75ad:Socket_2x8_HUB75
+      (place J2 0 0 front 0 (PN Socket_2x8_HUB75))
+    )
+    (component hub75ad:Socket_1x22_L
+      (place J1 0 0 front 0 (PN Socket_1x22_L))
+    )
+  )
+  (library
+    (image hub75ad:MountingHole_3.2mm
+      (keepout "" (circle F.Cu 3700))
+      (keepout "" (circle B.Cu 3700))
+    )
+    (image hub75ad:Socket_1x22_R
+      (pin Rect[A]Pad_1600.000000x1600.000000_um 1 25130 -1879.4)
+      (pin Round[A]Pad_1600.000000_um 2 25130 -4419.4)
+      (pin Round[A]Pad_1600.000000_um 3 25130 -6959.4)
+      (pin Round[A]Pad_1600.000000_um 4 25130 -9499.4)
+      (pin Round[A]Pad_1600.000000_um 5 25130 -12039.4)
+      (pin Round[A]Pad_1600.000000_um 6 25130 -14579.4)
+      (pin Round[A]Pad_1600.000000_um 7 25130 -17119.4)
+      (pin Round[A]Pad_1600.000000_um 8 25130 -19659.4)
+      (pin Round[A]Pad_1600.000000_um 9 25130 -22199.4)
+      (pin Round[A]Pad_1600.000000_um 10 25130 -24739.4)
+      (pin Round[A]Pad_1600.000000_um 11 25130 -27279.4)
+      (pin Round[A]Pad_1600.000000_um 12 25130 -29819.4)
+      (pin Round[A]Pad_1600.000000_um 13 25130 -32359.4)
+      (pin Round[A]Pad_1600.000000_um 14 25130 -34899.4)
+      (pin Round[A]Pad_1600.000000_um 15 25130 -37439.4)
+      (pin Round[A]Pad_1600.000000_um 16 25130 -39979.4)
+      (pin Round[A]Pad_1600.000000_um 17 25130 -42519.4)
+      (pin Round[A]Pad_1600.000000_um 18 25130 -45059.4)
+      (pin Round[A]Pad_1600.000000_um 19 25130 -47599.4)
+      (pin Round[A]Pad_1600.000000_um 20 25130 -50139.4)
+      (pin Round[A]Pad_1600.000000_um 21 25130 -52679.4)
+    )
+    (image hub75ad:PinHeader_1x3
+      (pin Rect[A]Pad_1600.000000x1600.000000_um 1 27400 -14600)
+      (pin Round[A]Pad_1600.000000_um 2 29940 -14600)
+      (pin Round[A]Pad_1600.000000_um 3 32480 -14600)
+    )
+    (image hub75ad:PinHeader_1x4
+      (pin Rect[A]Pad_1600.000000x1600.000000_um 1 27400 -5600)
+      (pin Round[A]Pad_1600.000000_um 2 29940 -5600)
+      (pin Round[A]Pad_1600.000000_um 3 32480 -5600)
+      (pin Round[A]Pad_1600.000000_um 4 35020 -5600)
+    )
+    (image hub75ad:Socket_2x8_HUB75
+      (pin Rect[A]Pad_1600.000000x1600.000000_um 1 27900 -19000)
+      (pin Round[A]Pad_1600.000000_um 2 30440 -19000)
+      (pin Round[A]Pad_1600.000000_um 3 27900 -21540)
+      (pin Round[A]Pad_1600.000000_um 4 30440 -21540)
+      (pin Round[A]Pad_1600.000000_um 5 27900 -24080)
+      (pin Round[A]Pad_1600.000000_um 6 30440 -24080)
+      (pin Round[A]Pad_1600.000000_um 7 27900 -26620)
+      (pin Round[A]Pad_1600.000000_um 8 30440 -26620)
+      (pin Round[A]Pad_1600.000000_um 9 27900 -29160)
+      (pin Round[A]Pad_1600.000000_um 10 30440 -29160)
+      (pin Round[A]Pad_1600.000000_um 11 27900 -31700)
+      (pin Round[A]Pad_1600.000000_um 12 30440 -31700)
+      (pin Round[A]Pad_1600.000000_um 13 27900 -34240)
+      (pin Round[A]Pad_1600.000000_um 14 30440 -34240)
+      (pin Round[A]Pad_1600.000000_um 15 27900 -36780)
+      (pin Round[A]Pad_1600.000000_um 16 30440 -36780)
+    )
+    (image hub75ad:Socket_1x22_L
+      (pin Rect[A]Pad_1600.000000x1600.000000_um 1 2270 -1879.4)
+      (pin Round[A]Pad_1600.000000_um 2 2270 -4419.4)
+      (pin Round[A]Pad_1600.000000_um 3 2270 -6959.4)
+      (pin Round[A]Pad_1600.000000_um 4 2270 -9499.4)
+      (pin Round[A]Pad_1600.000000_um 5 2270 -12039.4)
+      (pin Round[A]Pad_1600.000000_um 6 2270 -14579.4)
+      (pin Round[A]Pad_1600.000000_um 7 2270 -17119.4)
+      (pin Round[A]Pad_1600.000000_um 8 2270 -19659.4)
+      (pin Round[A]Pad_1600.000000_um 9 2270 -22199.4)
+      (pin Round[A]Pad_1600.000000_um 10 2270 -24739.4)
+      (pin Round[A]Pad_1600.000000_um 11 2270 -27279.4)
+      (pin Round[A]Pad_1600.000000_um 12 2270 -29819.4)
+      (pin Round[A]Pad_1600.000000_um 13 2270 -32359.4)
+      (pin Round[A]Pad_1600.000000_um 14 2270 -34899.4)
+      (pin Round[A]Pad_1600.000000_um 15 2270 -37439.4)
+      (pin Round[A]Pad_1600.000000_um 16 2270 -39979.4)
+      (pin Round[A]Pad_1600.000000_um 17 2270 -42519.4)
+      (pin Round[A]Pad_1600.000000_um 18 2270 -45059.4)
+      (pin Round[A]Pad_1600.000000_um 19 2270 -47599.4)
+      (pin Round[A]Pad_1600.000000_um 20 2270 -50139.4)
+      (pin Round[A]Pad_1600.000000_um 21 2270 -52679.4)
+    )
+    (padstack Round[A]Pad_1600.000000_um
+      (shape (circle F.Cu 1600))
+      (shape (circle B.Cu 1600))
+      (attach off)
+    )
+    (padstack Rect[A]Pad_1600.000000x1600.000000_um
+      (shape (rect F.Cu -800 -800 800 800))
+      (shape (rect B.Cu -800 -800 800 800))
+      (attach off)
+    )
+    (padstack "Via[0-1]_600:300_um"
+      (shape (circle F.Cu 600))
+      (shape (circle B.Cu 600))
+      (attach off)
+    )
+  )
+  (network
+    (net GND
+      (pins J3-1 J3-21 J5-3 J4-2 J2-3 J2-15)
+    )
+    (net UTX
+      (pins J3-2 J5-1)
+    )
+    (net URX
+      (pins J3-3 J5-2)
+    )
+    (net SCL
+      (pins J3-6 J4-4)
+    )
+    (net SDA
+      (pins J3-7 J4-3)
+    )
+    (net 3V3
+      (pins J4-1 J1-1 J1-2)
+    )
+    (net G1
+      (pins J2-1 J1-5)
+    )
+    (net R1
+      (pins J2-2 J1-4)
+    )
+    (net B1
+      (pins J2-4 J1-6)
+    )
+    (net G2
+      (pins J2-5 J1-8)
+    )
+    (net R2
+      (pins J2-6 J1-7)
+    )
+    (net E
+      (pins J2-7 J1-16)
+    )
+    (net B2
+      (pins J2-8 J1-9)
+    )
+    (net B
+      (pins J2-9 J1-11)
+    )
+    (net A
+      (pins J2-10 J1-10)
+    )
+    (net D
+      (pins J2-11 J1-15)
+    )
+    (net C
+      (pins J2-12 J1-12)
+    )
+    (net LAT
+      (pins J2-13 J1-18)
+    )
+    (net CLK
+      (pins J2-14 J1-17)
+    )
+    (net OE
+      (pins J2-16 J1-19)
+    )
+    (class kicad_default 3V3 A B B1 B2 C CLK D E G1 G2 LAT OE R1 R2 SCL
+      SDA URX UTX
+      (circuit
+        (use_via "Via[0-1]_600:300_um")
+      )
+      (rule
+        (width 200)
+        (clearance 200)
+      )
+    )
+    (class power_gnd GND
+      (type power)
+      (circuit
+        (use_via "Via[0-1]_600:300_um")
+      )
+      (rule
+        (width 200)
+        (clearance 200)
+      )
+    )
+  )
+  (wiring
+  )
+)
