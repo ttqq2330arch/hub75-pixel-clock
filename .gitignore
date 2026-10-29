@@ -41,3 +41,7 @@ build_log.txt
 /draw
 /操作手册.md
 
+# ---- 实拍展示图（README 用，特意允许入库）----
+!docs/images/
+!docs/images/*.jpg
+
