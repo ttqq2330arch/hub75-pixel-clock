@@ -25,8 +25,13 @@ tools/*.txt
 migration/
 # 收集来的第三方开源时钟固件，版权不属于本项目
 tools/dial_collection/
-# 已废弃的小程序工程
-miniprogram/
+# 小程序工程：v0.3.24 起恢复公开（配套硬件的官方手机控制端）
+# 仅排除本地预览二维码（开发者工具临时产物，且含 appid）
+miniprogram/preview_qr*.png
+# 开发者本地私有设置（微信官方要求不入库）
+miniprogram/project.private.config.json
+# 预览构建体积报告（临时产物）
+miniprogram/preview_info.json
 # 动画素材帧（大二进制，按需单独管理）
 vframes/
 tools/cc0_batch/
@@ -44,4 +49,5 @@ build_log.txt
 # ---- 实拍展示图（README 用，特意允许入库）----
 !docs/images/
 !docs/images/*.jpg
+!docs/images/*.png
 

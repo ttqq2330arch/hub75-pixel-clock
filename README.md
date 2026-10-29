@@ -22,6 +22,7 @@ ESP32-S3 驱动的 **64×64 HUB75 全彩点阵像素时钟 / 氛围屏**开源�
 
 - **64×64 HUB75 全彩点阵**，双缓冲 DMA 驱动，刷新率约 120Hz
 - **网页控制台**（`http://<板子IP>/`）：表盘商店 / 亮度滑块 / **屏幕旋转** / **WiFi 切换** / 动画
+- **微信小程序控制端**（`miniprogram/`）：手机扫码即用，与网页版共用同一套 API
 - **表盘商店**：内置多款表盘，可通过网页上传自定义 `.rgb565` 表盘
 - **屏幕旋转**：0°/90°/180°/270° 一键切换，断电保存
 - **WiFi 切换**：网页直接改 WiFi，连不上自动回落配网热点，永不失联
@@ -123,6 +124,62 @@ pio device monitor           # 115200 看启动日志
 
 ---
 
+## 📱 微信小程序控制端（手机端）
+
+不想开电脑？**用手机浏览器扫码即用**，功能与网页控制台等价。
+
+<p align="center">
+  <img src="docs/images/miniprogram-preview.png" alt="小程序控制台界面" width="300">
+</p>
+
+<p align="center"><sub>↑ 小程序控制台界面（按 <code>miniprogram/</code> 实际 WXML/WXSS 还原的示意图，非真机截图）</sub></p>
+
+### 三大功能
+
+| 页面 | 能力 |
+|---|---|
+| **控制台** | 设备在线状态 / 信号强度、亮度滑块 + 预设（10/30/60/100%/息屏）、固件表盘切换、flash 动画播放与保存 |
+| **表盘库** | 设备内全部表盘网格预览（64×64 像素风）、点击播放、删除、下拉刷新 |
+| **表盘商店** | 7 个本地像素表盘，一键推送到设备并立即播放 |
+
+### 快速开始（3 步）
+
+1. **微信开发者工具** → 导入项目 → 选择 `miniprogram/` 目录
+   - AppID 已带测试号（`wxd4ef8240f24c46ce`），也可换成你自己的
+2. **必须关闭域名校验**（否则打不开局域网 IP）：
+   详情 → 本地设置 → 勾选「**不校验合法域名、web-view（域名、TLS 版本以及 HTTPS 证书）**」
+3. **编译预览**：手机与板子连**同一个 WiFi**，点「预览」扫码
+
+> 板子地址默认 `192.168.1.52`，在「控制台」页顶部可改，**自动记住**（`storage` 键 `pixelclock_ip`）。
+
+### 技术要点
+
+- **通信**：全部走 WiFi HTTP（`wx.request` → 板子 `WebServer`），与网页版**同一套 API**
+  （`/status` `/brightness` `/face` `/diallist` `/dialpreview` `/dialplay` `/dialdel` `/dialup` `/animload` `/animsave`）
+- **预览图**：`/dialpreview` 返回首帧 8192B RGB565 小端 base64 → `utils/render.js` 解成 ImageData 画上 canvas 2d
+- **上传**：`/dialup` 裸 hex 分块（4096B/块，`Content-Type: text/plain`，`final=1&play=1` 收尾即播）
+- **参数约定**：POST 参数一律走 URL query（板子 WebServer 不解析 JSON body）
+
+### ⚠️ 关于蓝牙通道
+
+小程序**当前不提供蓝牙控制**。原因：固件侧 `src/config.h` 的 `ENABLE_BLE=0`（BLE + WiFi 共存会挤爆 lwIP 堆），
+`ble_service.cpp` 整块不编译，板子不广播 GATT 服务，扫描必然失败。
+
+代码已完整保留。若你的固件改回 `ENABLE_BLE=1`，把 `miniprogram/pages/home/home.js` 顶部的
+`const BLE_ENABLED = false` 改成 `true`，小程序端**无需其他改动**即可复活蓝牙通道。
+
+> 蓝牙模式设计为「体验版免域名通道」——正式版小程序走局域网 IP 需在审核备注里说明是内部运营用途。
+
+### 常见问题
+
+| 现象 | 原因 |
+|---|---|
+| 小程序一直转圈 / 请求失败 | 90% 是**没关域名校验**，或手机与板子不在同一网段 |
+| 改表盘要重新编译吗 | 不用。改 `miniprogram/data/faces/` 后重新导入即可 |
+| 想公网控制 | 局域网方案不适用于校外网络，需要内网穿透 / 云方案 |
+
+---
+
 ## 📁 代码结构
 
 ```
@@ -135,6 +192,17 @@ src/
   faces_data.h      内置表盘封面数据
   push_page_gz.h    控制台网页（gzip，由 tools/gen_push_page_gz.py 生成）
   ble_service.*     BLE 服务（代码保留，config.h 默认关闭以省内存）
+miniprogram/       微信小程序控制端（原生 WXML/WXSS/JS）
+  app.js/app.json   小程序入口与 tabBar 配置
+  pages/home/       控制台（设备状态 / 亮度 / 固件表盘 / 动画）
+  pages/dials/      设备表盘库
+  pages/store/      本地表盘商店
+  pages/detail/     表盘详情与推送
+  pages/devices/    蓝牙模式（当前固件关闭 BLE，页面有说明）
+  utils/api.js      WiFi HTTP 封装（含设备 IP 管理）
+  utils/render.js   RGB565 ↔ canvas 渲染
+  utils/ble.js      蓝牙通道（保留，固件开 BLE 后启用）
+  data/faces/       本地像素表盘数据
 tools/
   gen_faces_web.py / gen_push_page_gz.py   网页→头文件生成
   flash_firmware.py                     一键烧录脚本

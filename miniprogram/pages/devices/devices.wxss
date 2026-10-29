@@ -1,0 +1,16 @@
+.list,
+.card-box {
+  background: #1b1b1b;
+  border-radius: 16rpx;
+  padding: 16rpx;
+  margin-top: 16rpx;
+}
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 18rpx 8rpx;
+  border-bottom: 1rpx solid #2a2a2a;
+}
+.item:last-child {
+  border-bottom: none;
+}

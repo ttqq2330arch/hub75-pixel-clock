@@ -1,0 +1,11 @@
+<view class="view" wx:if="{{face}}">
+  <canvas type="2d" id="big" class="big"></canvas>
+  <view class="title">{{face.name}}</view>
+  <view class="muted">作者：{{face.author}} · 分类：{{face.category}} · {{face.width}}×{{face.height}}</view>
+  <view class="btn" bindtap="push">推送到设备</view>
+  <view class="progress" wx:if="{{progress > 0 && progress < 100}}">
+    <view class="bar" style="width: {{progress}}%"></view>
+    <text class="pct">{{progress}}%</text>
+  </view>
+  <view class="muted">{{status}}</view>
+</view>

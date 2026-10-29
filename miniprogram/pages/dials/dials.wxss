@@ -1,0 +1,97 @@
+/* pages/dials/dials.wxss */
+.page {
+  padding: 20rpx 20rpx 60rpx;
+}
+
+.msg {
+  margin-bottom: 20rpx;
+  padding: 16rpx 24rpx;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+}
+.msg.ok {
+  background: #1b3a1b;
+  color: #7be07b;
+}
+.msg.bad {
+  background: #3a1b1b;
+  color: #ff8a8a;
+}
+
+.empty {
+  text-align: center;
+  color: #777;
+  font-size: 28rpx;
+  padding: 160rpx 0;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.cell {
+  width: 336rpx;
+  background: #1e1e1e;
+  border-radius: 16rpx;
+  padding: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.thumb {
+  width: 304rpx;
+  height: 304rpx;
+  border-radius: 8rpx;
+  background: #000;
+  /* 64×64 放大 4.75 倍：像素风，优先 nearest-neighbor */
+  image-rendering: pixelated;
+}
+
+.name {
+  font-size: 26rpx;
+  color: #eee;
+  margin-top: 12rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta {
+  font-size: 20rpx;
+  color: #888;
+  margin-top: 4rpx;
+}
+.meta .dot {
+  margin: 0 6rpx;
+}
+.badge {
+  margin-left: 8rpx;
+  padding: 0 10rpx;
+  border-radius: 6rpx;
+  background: #3a2f00;
+  color: #ffc107;
+  font-size: 18rpx;
+}
+
+.ops {
+  display: flex;
+  gap: 12rpx;
+  margin-top: 12rpx;
+}
+.ops button {
+  flex: 1;
+  margin: 0;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+}
+.ops .play {
+  background: #2a2a2a;
+  color: #ffc107;
+}
+.ops .del {
+  background: #2a2a2a;
+  color: #ff8a8a;
+}

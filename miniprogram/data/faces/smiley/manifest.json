@@ -1,0 +1,11 @@
+{
+  "id": "smiley",
+  "name": "笑脸",
+  "author": "内置",
+  "width": 64,
+  "height": 64,
+  "pixel_format": "RGB565",
+  "bg_mode": "transparent",
+  "frame_count": 1,
+  "fps": 1
+}

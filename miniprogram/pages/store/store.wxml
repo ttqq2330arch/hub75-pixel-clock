@@ -1,0 +1,27 @@
+<view class="view">
+  <view class="title">表盘商店</view>
+  <scroll-view scroll-x class="cats">
+    <view
+      wx:for="{{cats}}"
+      wx:key="*this"
+      class="chip {{activeCat===item?'on':''}}"
+      data-cat="{{item}}"
+      bindtap="onCat"
+    >{{item}}</view>
+  </scroll-view>
+
+  <view class="grid">
+    <view
+      class="card"
+      wx:for="{{faces}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onTap"
+    >
+      <canvas type="2d" id="cv-{{item.id}}" class="cv"></canvas>
+      <text class="name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <view class="muted">共 {{faces.length}} 个表盘 · 预览为 64×64 像素放大</view>
+</view>

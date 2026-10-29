@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  /* 按小程序 app.wxss 的实际配色与字号还原（rpx → px 按 750rpx=375px 即 1rpx=0.5px 折算） */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0b0b0b; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+  .phone {
+    width: 375px; height: 780px; background: #111111; color: #f5f5f5;
+    overflow: hidden; position: relative;
+  }
+  /* 顶部导航条（小程序原生 nav） */
+  .navbar {
+    height: 44px; background: #141414; display: flex; align-items: center;
+    justify-content: center; font-size: 16px; font-weight: 600;
+    border-bottom: 1px solid #222; position: relative;
+  }
+  .capsule {
+    position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+    width: 87px; height: 32px; border: 1px solid #333; border-radius: 16px;
+    display: flex; align-items: center; justify-content: space-around;
+    background: rgba(255,255,255,.06);
+  }
+  .capsule i { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid #888; display: block; }
+  .capsule b { width: 13px; height: 13px; border-radius: 50%; background: #888; display: block; }
+  /* 可用高度 = 780(机身) - 44(导航条) - 56(tabBar) = 680 */
+  .body { padding: 12px; height: 680px; overflow: hidden; }
+  .card {
+    background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 10px;
+    padding: 12px; margin-bottom: 10px;
+  }
+  /* 避免最后一张卡被 tabBar 截断 */
+  .card:last-child { margin-bottom: 0; }
+  .card-title { font-size: 15px; font-weight: 600; margin-bottom: 10px; color: #f5f5f5; }
+  .card-title .sub { font-size: 12px; color: #888; font-weight: 400; margin-left: 6px; }
+  .row { display: flex; align-items: center; padding: 5px 0; font-size: 13px; }
+  .row .k { width: 62px; color: #888; flex-shrink: 0; }
+  .row .v { color: #f5f5f5; }
+  .ok { color: #4caf50; } .bad { color: #ef5350; }
+  .ip {
+    flex: 1; background: #222; border: 1px solid #333; border-radius: 6px;
+    padding: 6px 8px; color: #ffc107; font-size: 13px;
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+  }
+  /* 亮度滑块 */
+  .slider { position: relative; height: 26px; margin: 4px 0 10px; }
+  .track { position: absolute; top: 11px; left: 0; right: 0; height: 4px; background: #333; border-radius: 2px; }
+  .fill { position: absolute; top: 11px; left: 0; width: 50%; height: 4px; background: #ffc107; border-radius: 2px; }
+  .knob {
+    position: absolute; top: 4px; left: 50%; width: 18px; height: 18px;
+    background: #ffc107; border-radius: 50%; border: 3px solid #1a1a1a;
+    box-shadow: 0 0 0 1px #ffc107; transform: translateX(-50%);
+  }
+  .presets { display: flex; gap: 6px; }
+  .presets button {
+    flex: 1; background: #222; color: #f5f5f5; border: 1px solid #333;
+    border-radius: 6px; padding: 7px 0; font-size: 12px;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    background: #222; color: #f5f5f5; border: 1px solid #333; border-radius: 14px;
+    padding: 6px 12px; font-size: 12px;
+  }
+  .chip.on { background: #ffc107; color: #1a1a1a; border-color: #ffc107; font-weight: 600; }
+  .btn-row { display: flex; gap: 8px; }
+  .btn-row button {
+    flex: 1; background: #ffc107; color: #1a1a1a; border: none; border-radius: 7px;
+    padding: 9px 0; font-size: 12px; font-weight: 600;
+  }
+  .btn-row button.ghost { background: #222; color: #f5f5f5; border: 1px solid #444; }
+  .link { padding: 9px 0; font-size: 13px; color: #ffc107; }
+  .link + .link { border-top: 1px solid #2a2a2a; }
+  .hint { font-size: 11px; color: #888; margin-top: 8px; }
+  /* 底部 tabBar */
+  .tabbar {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 56px;
+    background: #141414; border-top: 1px solid #222; display: flex;
+  }
+  .tabbar div {
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; font-size: 11px; color: #888; gap: 3px;
+  }
+  .tabbar div.on { color: #ffc107; }
+  .tabbar .ic { font-size: 17px; line-height: 1; }
+  /* 右侧：表盘库缩略图网格 */
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .tile {
+    aspect-ratio: 1; background: #222; border: 1px solid #2a2a2a; border-radius: 7px;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .px { display: grid; grid-template-columns: repeat(8, 1fr); gap: 1px; width: 68%; }
+  .px i { aspect-ratio: 1; border-radius: 1px; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="navbar">像素时钟
+    <div class="capsule"><i></i><b></b></div>
+  </div>
+
+  <div class="body">
+    <!-- 控制台 -->
+    <div class="card">
+      <div class="card-title">设备</div>
+      <div class="row"><span class="k">地址</span><span class="ip">192.168.1.52</span></div>
+      <div class="row"><span class="k">状态</span><span class="v ok">● 在线</span></div>
+      <div class="row"><span class="k">信号</span><span class="v">-46 dBm</span></div>
+      <div class="row"><span class="k">主机名</span><span class="v">pixelclock</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">亮度 <span class="sub">50%</span></div>
+      <div class="slider"><div class="track"></div><div class="fill"></div><div class="knob"></div></div>
+      <div class="presets">
+        <button>10%</button><button>30%</button><button>60%</button><button>100%</button><button>息屏</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">固件表盘</div>
+      <div class="chips">
+        <span class="chip">TEST 接线验证</span>
+        <span class="chip on">CLOCK 像素时钟</span>
+        <span class="chip">PLASMA 等离子</span>
+        <span class="chip">REMOTE 远程表盘</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">动画背景</div>
+      <div class="btn-row">
+        <button>▶ 播放 flash 动画</button>
+        <button class="ghost">保存当前到 flash</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">表盘库 <span class="sub">设备内 12 个表盘</span></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+
+  <div class="tabbar">
+    <div class="on"><span class="ic">◉</span>控制台</div>
+    <div><span class="ic">▤</span>表盘库</div>
+    <div><span class="ic">◈</span>商店</div>
+  </div>
+</div>
+
+<script>
+// 用真实表盘像素数据渲染缩略图（miniprogram/data/faces/*/preview.json）
+const FACES = {
+  smiley: [['#ffc107','#ffc107','#f5f5f5','#f5f5f5','#f5f5f5','#f5f5f5','#ffc107','#ffc107'],
+           ['#ffc107','#f5f5f5','#1a1a1a','#1a1a1a','#1a1a1a','#1a1a1a','#f5f5f5','#ffc107'],
+           ['#f5f5f5','#1a1a1a','#1a1a1a','#f5f5f5','#f5f5f5','#1a1a1a','#1a1a1a','#f5f5f5'],
+           ['#f5f5f5','#1a1a1a','#1a1a1a','#1a1a1a','#1a1a1a','#1a1a1a','#1a1a1a','#f5f5f5'],
+           ['#f5f5f5','#f5f5f5','#1a1a1a','#1a1a1a','#1a1a1a','#1a1a1a','#f5f5f5','#f5f5f5'],
+           ['#ffc107','#f5f5f5','#ffc107','#ffc107','#ffc107','#ffc107','#f5f5f5','#ffc107'],
+           ['#f5f5f5','#f5f5f5','#f5f5f5','#f5f5f5','#f5f5f5','#f5f5f5','#f5f5f5','#f5f5f5']],
+  heart:  [['#222','#222','#222','#e91e63','#e91e63','#222','#222','#222'],
+           ['#222','#222','#e91e63','#e91e63','#e91e63','#e91e63','#222','#222'],
+           ['#222','#e91e63','#e91e63','#e91e63','#e91e63','#e91e63','#e91e63','#222'],
+           ['#e91e63','#e91e63','#e91e63','#e91e63','#e91e63','#e91e63','#e91e63','#e91e63'],
+           ['#e91e63','#e91e63','#e91e63','#e91e63','#e91e63','#e91e63','#e91e63','#e91e63'],
+           ['#222','#e91e63','#e91e63','#e91e63','#e91e63','#e91e63','#e91e63','#222'],
+           ['#222','#222','#e91e63','#e91e63','#e91e63','#e91e63','#222','#222'],
+           ['#222','#222','#222','#e91e63','#e91e63','#222','#222','#222']],
+  fire:   [['#222','#222','#ff9800','#ff9800','#ff9800','#ff9800','#222','#222'],
+           ['#222','#ff6f00','#ff9800','#ff9800','#ff9800','#ff9800','#ff6f00','#222'],
+           ['#ff5722','#ff9800','#ffb300','#ffe082','#ffb300','#ff9800','#ff5722','#ff5722'],
+           ['#ff5722','#ff9800','#ffb300','#ffe082','#ffb300','#ff9800','#ff5722','#222'],
+           ['#222','#ff6f00','#ff9800','#ff9800','#ff9800','#ff9800','#ff6f00','#222'],
+           ['#222','#222','#ff9800','#ff9800','#ff9800','#ff9800','#222','#222'],
+           ['#222','#222','#222','#ff9800','#ff9800','#222','#222','#222'],
+           ['#222','#222','#222','#222','#222','#222','#222','#222']],
+  star:   [['#222','#222','#222','#ffe082','#ffe082','#222','#222','#222'],
+           ['#222','#222','#ffe082','#ffe082','#ffe082','#ffe082','#222','#222'],
+           ['#222','#ffe082','#222','#ffe082','#ffe082','#222','#ffe082','#222'],
+           ['#ffe082','#ffe082','#ffe082','#ffe082','#ffe082','#ffe082','#ffe082','#ffe082'],
+           ['#222','#222','#ffe082','#ffe082','#ffe082','#ffe082','#222','#222'],
+           ['#222','#ffe082','#ffe082','#222','#222','#ffe082','#ffe082','#222'],
+           ['#ffe082','#ffe082','#222','#222','#222','#222','#ffe082','#ffe082'],
+           ['#222','#222','#222','#222','#222','#222','#222','#222']],
+  rainbow:[['#ef5350','#ff9800','#ffe082','#4caf50','#2196f3','#9c27b0','#e91e63','#ff9800'],
+           ['#ff9800','#ffe082','#4caf50','#2196f3','#9c27b0','#e91e63','#ff9800','#ffe082'],
+           ['#ffe082','#4caf50','#2196f3','#9c27b0','#e91e63','#ff9800','#ffe082','#4caf50'],
+           ['#4caf50','#2196f3','#9c27b0','#e91e63','#ff9800','#ffe082','#4caf50','#2196f3'],
+           ['#2196f3','#9c27b0','#e91e63','#ff9800','#ffe082','#4caf50','#2196f3','#9c27b0'],
+           ['#9c27b0','#e91e63','#ff9800','#ffe082','#4caf50','#2196f3','#9c27b0','#e91e63'],
+           ['#e91e63','#ff9800','#ffe082','#4caf50','#2196f3','#9c27b0','#e91e63','#ff9800'],
+           ['#ff9800','#ffe082','#4caf50','#2196f3','#9c27b0','#e91e63','#ff9800','#ffe082']],
+  matrix: [['#222','#222','#222','#222','#222','#222','#222','#222'],
+           ['#00e676','#222','#00e676','#222','#00e676','#222','#00e676','#222'],
+           ['#222','#222','#222','#222','#222','#222','#222','#222'],
+           ['#00e676','#00e676','#00e676','#222','#00e676','#00e676','#00e676','#00e676'],
+           ['#222','#222','#222','#222','#222','#222','#222','#222'],
+           ['#00e676','#222','#00e676','#222','#00e676','#222','#00e676','#222'],
+           ['#222','#222','#222','#222','#222','#222','#222','#222'],
+           ['#00e676','#00e676','#222','#00e676','#00e676','#222','#00e676','#00e676']]
+};
+const g = document.getElementById('grid');
+const order = ['smiley','heart','fire'];
+order.forEach(k => {
+  const tile = document.createElement('div');
+  tile.className = 'tile';
+  const px = document.createElement('div');
+  px.className = 'px';
+  FACES[k].forEach(row => row.forEach(c => {
+    const i = document.createElement('i');
+    i.style.background = c;
+    px.appendChild(i);
+  }));
+  tile.appendChild(px);
+  g.appendChild(tile);
+});
+</script>
+</body>
+</html>

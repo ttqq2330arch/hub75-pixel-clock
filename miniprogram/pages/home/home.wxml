@@ -1,0 +1,116 @@
+<view class="page">
+
+  <!-- 消息条 -->
+  <view wx:if="{{msg}}" class="msg {{msgType}}">{{msg}}</view>
+
+  <!-- 设备卡 -->
+  <view class="card">
+    <view class="card-title">设备</view>
+    <view class="row">
+      <text class="k">地址</text>
+      <input class="v ip" value="{{ip}}" bindblur="onIpBlur" placeholder="192.168.1.52" />
+    </view>
+    <view class="row">
+      <text class="k">状态</text>
+      <text class="v {{st.online ? 'ok' : 'bad'}}">{{st.online ? '● 在线' : '● 离线'}}</text>
+    </view>
+    <view class="row" wx:if="{{st.online}}">
+      <text class="k">信号</text>
+      <text class="v">{{st.rssi}} dBm</text>
+    </view>
+    <view class="row" wx:if="{{st.online}}">
+      <text class="k">主机名</text>
+      <text class="v">{{st.host}}</text>
+    </view>
+  </view>
+
+  <!-- 亮度卡 -->
+  <view class="card">
+    <view class="card-title">亮度 <text class="sub">{{brightPct}}%</text></view>
+    <slider
+      min="0" max="255" step="1"
+      value="{{bright}}"
+      activeColor="#ffc107"
+      backgroundColor="#333"
+      block-size="20"
+      bindchanging="onBrightChanging"
+      bindchange="onBrightChange" />
+    <view class="presets">
+      <button size="mini" data-v="26" bindtap="onPreset">10%</button>
+      <button size="mini" data-v="77" bindtap="onPreset">30%</button>
+      <button size="mini" data-v="153" bindtap="onPreset">60%</button>
+      <button size="mini" data-v="255" bindtap="onPreset">100%</button>
+      <button size="mini" data-v="0" bindtap="onPreset">息屏</button>
+    </view>
+  </view>
+
+  <!-- 固件表盘 -->
+  <view class="card">
+    <view class="card-title">固件表盘</view>
+    <view class="chips">
+      <button
+        class="chip"
+        size="mini"
+        wx:for="{{fwFaces}}"
+        wx:key="idx"
+        data-idx="{{item.idx}}"
+        bindtap="onFace">{{item.name}}</button>
+    </view>
+  </view>
+
+  <!-- 动画背景 -->
+  <view class="card">
+    <view class="card-title">动画背景</view>
+    <view class="btn-row">
+      <button size="mini" bindtap="onAnimLoad">▶ 播放 flash 动画</button>
+      <button size="mini" bindtap="onAnimSave">💾 保存当前到 flash</button>
+    </view>
+    <view class="hint" wx:if="{{animInfo}}">当前：{{animInfo}}（重启后自动播放）</view>
+  </view>
+
+  <!-- 蓝牙控制（体验版免域名通道）——固件 ENABLE_BLE=0 时隐藏，详见 home.js 注释 -->
+  <view class="card" wx:if="{{bleEnabled}}">
+    <view class="card-title">
+      蓝牙控制
+      <text class="sub" wx:if="{{bleConnected}}">● 已连接</text>
+      <text class="sub bad" wx:elif="{{!bleConnected}}">● 未连接</text>
+    </view>
+    <block wx:if="{{!bleConnected}}">
+      <view class="hint">体验版/身边无电脑时走蓝牙直连（板子在家范围内即可）</view>
+      <view class="btn-row">
+        <button size="mini" bindtap="bleConnect" disabled="{{bleBusy}}">
+          {{bleBusy ? '连接中…' : '连接板子'}}
+        </button>
+      </view>
+      <view class="hint" wx:if="{{bleStatus}}">{{bleStatus}}</view>
+    </block>
+    <block wx:else>
+      <slider
+        min="0" max="255" step="1"
+        value="{{bleBright}}"
+        activeColor="#ffc107"
+        backgroundColor="#333"
+        block-size="20"
+        bindchanging="onBleBrightChanging"
+        bindchange="onBleBrightChange" />
+      <view class="chips">
+        <button class="chip" size="mini" wx:for="{{fwFaces}}" wx:key="idx"
+          data-idx="{{item.idx}}" bindtap="onBleFace">{{item.name}}</button>
+      </view>
+      <view class="chips">
+        <button class="chip" size="mini" wx:for="{{quickDials}}" wx:key="*this"
+          data-n="{{item}}" bindtap="onBleQuick">▶ {{item}}</button>
+      </view>
+      <view class="btn-row">
+        <button size="mini" bindtap="bleDisconnect">断开蓝牙</button>
+      </view>
+    </block>
+  </view>
+
+  <!-- 快捷入口 -->
+  <view class="card">
+    <view class="link" bindtap="goDials">📁 表盘库（设备内 {{dialCount}} 个表盘）›</view>
+    <view class="link" wx:if="{{bleEnabled}}" bindtap="goBle">🔵 蓝牙模式（旧通道）›</view>
+  </view>
+
+</view>

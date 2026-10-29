@@ -1,0 +1,46 @@
+<view class="view">
+  <view class="title">我的设备</view>
+
+  <view class="card-box" wx:if="{{!bleEnabled}}">
+    <view class="title">蓝牙通道当前未启用</view>
+    <view class="muted">
+      固件侧 BLE 已关闭（src/config.h 的 ENABLE_BLE=0），板子不广播 GATT 服务，本页扫描不到设备。
+      请改用「控制台」页的 WiFi 控制（手机与板子同一 WiFi 即可）。如需蓝牙通道，把固件 ENABLE_BLE 改回 1 重新编译即可自动恢复。
+    </view>
+  </view>
+
+  <block wx:else>
+  <view class="btn ghost" bindtap="scan">扫描蓝牙设备</view>
+
+  <view wx:if="{{devices.length}}" class="list">
+    <view
+      class="item"
+      wx:for="{{devices}}"
+      wx:key="deviceId"
+      data-id="{{item.deviceId}}"
+      bindtap="connect"
+    >
+      <text>{{item.name}}</text>
+      <text class="muted">RSSI {{item.RSSI}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{device}}" class="card-box">
+    <view class="title">已连接：{{device.name}}</view>
+    <view class="btn ghost" bindtap="sync">校时</view>
+    <view class="muted">切换固件内置表盘：</view>
+    <view
+      class="item"
+      wx:for="{{fwFaces}}"
+      wx:key="idx"
+      data-idx="{{item.idx}}"
+      bindtap="sel"
+    >
+      <text>#{{item.idx}} {{item.name}}</text>
+    </view>
+    <view class="btn ghost" bindtap="disconnect">断开</view>
+  </view>
+
+  <view class="muted">{{status}}</view>
+  </block>
+</view>

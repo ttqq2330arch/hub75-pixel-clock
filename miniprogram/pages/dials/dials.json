@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "表盘库",
+  "navigationBarBackgroundColor": "#141414",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#141414",
+  "enablePullDownRefresh": true
+}

@@ -1,0 +1,29 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/dials/dials",
+    "pages/store/store",
+    "pages/detail/detail",
+    "pages/devices/devices"
+  ],
+  "window": {
+    "navigationBarTitleText": "像素时钟",
+    "navigationBarBackgroundColor": "#141414",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#141414",
+    "backgroundTextStyle": "dark"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#888888",
+    "selectedColor": "#ffc107",
+    "backgroundColor": "#141414",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/home/home", "text": "控制台" },
+      { "pagePath": "pages/dials/dials", "text": "表盘库" },
+      { "pagePath": "pages/store/store", "text": "表盘商店" }
+    ]
+  }
+}

@@ -1,0 +1,101 @@
+/* pages/home/home.wxss — 暗色卡片风格（全局见 app.wxss） */
+.page {
+  padding: 20rpx 24rpx 60rpx;
+}
+
+.msg {
+  margin: 0 0 20rpx;
+  padding: 16rpx 24rpx;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+}
+.msg.ok {
+  background: #1b3a1b;
+  color: #7be07b;
+}
+.msg.bad {
+  background: #3a1b1b;
+  color: #ff8a8a;
+}
+
+.card {
+  background: #1e1e1e;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.card-title {
+  font-size: 28rpx;
+  color: #ffc107;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+}
+.card-title .sub {
+  color: #888;
+  font-weight: 400;
+  font-size: 24rpx;
+  margin-left: 8rpx;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64rpx;
+  font-size: 28rpx;
+}
+.row .k {
+  color: #999;
+}
+.row .v {
+  color: #eee;
+}
+.row .v.ok {
+  color: #7be07b;
+}
+.row .v.bad {
+  color: #ff8a8a;
+}
+.ip {
+  text-align: right;
+  color: #eee;
+  font-size: 28rpx;
+  width: 360rpx;
+}
+
+.presets, .chips, .btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 12rpx;
+}
+.presets button, .chips .chip, .btn-row button {
+  background: #2a2a2a;
+  color: #ddd;
+  border-radius: 10rpx;
+  margin: 0;
+}
+.presets button {
+  color: #ffc107;
+}
+
+.hint {
+  margin-top: 16rpx;
+  font-size: 22rpx;
+  color: #777;
+  line-height: 1.6;
+}
+
+.card-title .sub.bad {
+  color: #ff8a8a;
+}
+
+.link {
+  font-size: 28rpx;
+  color: #ddd;
+  padding: 18rpx 0;
+}
+.link + .link {
+  border-top: 1rpx solid #2a2a2a;
+}

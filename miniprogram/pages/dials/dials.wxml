@@ -1,0 +1,24 @@
+<view class="page">
+
+  <view wx:if="{{msg}}" class="msg {{msgType}}">{{msg}}</view>
+  <view wx:if="{{loading && !dials.length}}" class="empty">加载中…</view>
+  <view wx:elif="{{!dials.length}}" class="empty">设备上还没有表盘\n去「表盘商店」推送一个吧</view>
+
+  <view class="grid" wx:if="{{dials.length}}">
+    <view class="cell" wx:for="{{dials}}" wx:key="n">
+      <canvas type="2d" id="cv-{{index}}" class="thumb" />
+      <view class="name">{{item.n}}</view>
+      <view class="meta">
+        <text>{{item.c}} 帧</text>
+        <text class="dot">·</text>
+        <text>{{item.f}} fps</text>
+        <text wx:if="{{item.b}}" class="badge">burst</text>
+      </view>
+      <view class="ops">
+        <button size="mini" class="play" data-n="{{item.n}}" bindtap="onPlay">播放</button>
+        <button size="mini" class="del" data-n="{{item.n}}" bindtap="onDel">删除</button>
+      </view>
+    </view>
+  </view>
+
+</view>
