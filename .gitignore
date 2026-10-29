@@ -69,3 +69,9 @@ app-android/gradle/wrapper/gradle-wrapper.jar
 !app-android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
 !app-android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
 
+# 构建产物与安装包不入库（APK 十几 MB，发布页/桌面交付目录里有）
+app-android/*.apk
+app-android/app/build/
+app-android/build/
+app-android/.gradle/
+

@@ -75,12 +75,46 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 
 ## 🔒 网络安全说明
 
-板子是局域网内明文 HTTP。APP 通过 `network_security_config.xml` **只对私有网段放行明文**，公网仍强制 HTTPS：
+板子是局域网内明文 HTTP（ESP32 WebServer 没有 TLS）。APP 通过
+`network_security_config.xml` 放行明文，公网 HTTPS 仍照常校验系统 CA。
+
+> ⚠️ **一个容易踩的坑**：Android 的 `<domain>` 按**主机名/域名后缀**匹配，
+> 它**不是 CIDR 网段**。写 `<domain>192.168.1.0</domain>` 不会匹配
+> `192.168.1.46`；板子 IP 又由 DHCP 分配会变，无法穷举成 domain 列表。
+> 所以局域网明文只能在 `base-config` 层放行。
+>
+> 写错的后果是系统直接拒绝请求：
+> `java.io.IOException: Cleartext HTTP traffic to 192.168.1.46 not permitted`，
+> APP 表现就是「连不上」，而且**日志里才有真因，界面上看不出**。
+
+---
+
+## 🩺 连不上怎么排查
+
+APP 连接失败时会把**真实原因**显示出来，而不是笼统的"连接失败"。
+打开「控制台」→「切换设备」，输入框下方会显示本机网络情况：
 
 ```
-192.168.x.x / 10.x.x.x / 172.16.x.x / *.local  →  允许明文
-其它所有域名                                      →  只允许 HTTPS
+本机 192.168.1.7（板子应在 192.168.1.x 网段）
 ```
+
+| 现象 | 原因 | 怎么办 |
+|---|---|---|
+| 显示「本机未连接 WiFi」 | 手机用着移动数据 | 连上和板子同一个 WiFi |
+| 本机与板子不同网段 | 板子 IP 变了 / 访客网络 | 手机连板子那个 WiFi |
+| 连接超时 | 路由器 AP 隔离 | 关掉访客网络与 AP 隔离 |
+| 自动发现扫不到 | 路由器屏蔽 mDNS 组播 | 手填 IP，功能完全一样 |
+
+**最快的验证**：手机浏览器打开 `http://板子IP/status`。
+能出 JSON 说明网络通，APP 也能用；打不开就是网络问题。
+
+### mDNS 自动发现的两个前提
+
+1. **必须持有 `WifiManager.MulticastLock`**。Android 会丢弃未持组播锁的进程
+   收到的组播包，光申请 `CHANGE_WIFI_MULTICAST_STATE` 权限**没用**。
+   不持锁时 `NsdManager` 永远收不到 `onServiceFound`。
+2. 持有组播锁后仍被部分路由器过滤时，用 `LocalNet` 推出的**本机 /24 网段**
+   做并发扫描兜底（1.2s 超时，只扫当前网段，不是全网扫描）。
 
 ---
 
@@ -91,7 +125,8 @@ app/src/main/java/com/ttqq/pixelclock/
   MainActivity.kt              入口
   net/
     BoardClient.kt             板子 HTTP 客户端（全部 REST 接口封装）
-    BoardDiscovery.kt          mDNS 自动发现 + /24 兜底扫描
+    BoardDiscovery.kt          mDNS 自动发现（持组播锁）+ /24 兜底扫描
+    LocalNet.kt                本机 WiFi IP / 网段探测（连接诊断用）
     DialPreview.kt             base64 → RGB565 像素解码
   data/
     Prefs.kt                   本地偏好（板子地址 / 亮度 / 旋转）

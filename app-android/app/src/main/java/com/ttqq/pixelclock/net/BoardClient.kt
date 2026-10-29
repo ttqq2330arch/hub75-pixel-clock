@@ -49,10 +49,11 @@ class BoardClient(private var baseUrl: String) {
         fun normalize(input: String): String {
             var h = input.trim()
             if (h.isEmpty()) return h
-            if (!h.startsWith("http://") && !h.startsWith("https://")) {
-                h = "http://$h"
-            }
-            return h.trimEnd('/')
+            // 板子只提供明文 HTTP（ESP32 WebServer 没有 TLS）。
+            // 用户若误填 https://，Android 会先因证书校验失败而报错，
+            // 这里统一纠正成 http://，避免用户白折腾。
+            h = h.removePrefix("https://").removePrefix("http://")
+            return "http://$h".trimEnd('/')
         }
     }
 

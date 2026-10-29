@@ -7,6 +7,7 @@ import com.ttqq.pixelclock.data.Prefs
 import com.ttqq.pixelclock.net.BoardClient
 import com.ttqq.pixelclock.net.BoardDiscovery
 import com.ttqq.pixelclock.net.DialPreview
+import com.ttqq.pixelclock.net.LocalNet
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -69,14 +70,15 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         _state.update { it.copy(host = h, busy = true, message = null) }
 
         viewModelScope.launch {
-            val ok = runCatching { client.statusRetry() }.getOrNull()
+            val result = runCatching { client.statusRetry() }
+            val ok = result.getOrNull()
             if (ok == null) {
                 _state.update {
                     it.copy(
                         online = false,
                         busy = false,
                         status = null,
-                        message = if (auto) "连不上 $h" else "连接失败：$h",
+                        message = diagnose(h, result.exceptionOrNull()),
                         messageIsError = true,
                     )
                 }
@@ -103,6 +105,34 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     fun disconnect() {
         stopPolling()
         _state.update { it.copy(online = false, status = null, message = "已断开") }
+    }
+
+    /**
+     * 连接失败时给出【可执行的】排查提示，而不是干巴巴一句"连不上"。
+     * 用户 90% 的情况是：手机没连 WiFi / 手机和板子不在同一网段 / 路由器开了 AP 隔离。
+     */
+    private fun diagnose(host: String, err: Throwable?): String {
+        val raw = err?.message.orEmpty()
+        val base = when {
+            raw.contains("Cleartext", ignoreCase = true) ->
+                "系统拒绝了明文 HTTP（network security config 问题）"
+            raw.contains("Unable to resolve host", ignoreCase = true) ||
+                raw.contains("Name or service not known", ignoreCase = true) ->
+                "找不到主机名"
+            raw.contains("Connection refused", ignoreCase = true) ->
+                "对方拒绝连接"
+            raw.contains("timed out", ignoreCase = true) ||
+                raw.contains("timeout", ignoreCase = true) ->
+                "连接超时"
+            raw.contains("Network is unreachable", ignoreCase = true) ->
+                "网络不可达"
+            else -> raw.ifBlank { "未知错误" }
+        }
+        return buildString {
+            append("连接失败：$host\n")
+            append("原因：$base\n")
+            append(LocalNet.hint(getApplication()))
+        }
     }
 
     /** 周期刷新状态 */
@@ -133,7 +163,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             val found = runCatching { discovery.browse(5000) }.getOrDefault(emptyList())
             if (found.isEmpty()) {
-                // mDNS 被路由器/机型过滤时的兜底：扫常见网段
+                // mDNS 被路由器/机型过滤时的兜底：扫本机 WiFi 所在网段
                 val hits = runCatching { discovery.probeCandidates() }.getOrDefault(emptyList())
                 val mapped = hits.map {
                     BoardDiscovery.Found(name = it, host = it, address = it, port = 80)
@@ -142,7 +172,9 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
                     it.copy(
                         discovering = false,
                         discovered = mapped,
-                        message = if (mapped.isEmpty()) "没找到板子，检查一下板子是否上电连上 WiFi" else "扫描到 ${mapped.size} 个板子",
+                        message = if (mapped.isEmpty()) {
+                            "没找到板子。${LocalNet.hint(getApplication())}"
+                        } else "扫描到 ${mapped.size} 个板子",
                         messageIsError = mapped.isEmpty(),
                     )
                 }

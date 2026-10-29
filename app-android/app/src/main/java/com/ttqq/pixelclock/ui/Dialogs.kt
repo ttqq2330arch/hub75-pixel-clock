@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import com.ttqq.pixelclock.net.LocalNet
 import java.io.ByteArrayOutputStream
 
 // ---------------- 连接对话框 ----------------
@@ -47,6 +48,9 @@ fun ConnectDialog(
     onDiscover: () -> Unit,
 ) {
     var input by remember { mutableStateOf(st.host) }
+    val context = LocalContext.current
+    // 实时提示本机网段：用户照着填板子 IP，不用盲猜
+    val netHint = remember(context) { LocalNet.hint(context) }
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -71,7 +75,14 @@ fun ConnectDialog(
                 )
                 Spacer(Modifier.height(10.dp))
                 Text(
-                    "提示：主机名填 pixelclock.local 可跨 IP 段访问（板子改了 IP 也不用重填）",
+                    netHint,
+                    color = if (LocalNet.hasWifi(context)) TextLow else Accent,
+                    fontSize = 11.sp,
+                    fontFamily = FontFamily.Monospace,
+                )
+                Spacer(Modifier.height(6.dp))
+                Text(
+                    "提示：主机名填板子的 mDNS 名（如 pixelclock-02.local），板子换 IP 也不用重填",
                     color = TextLow,
                     fontSize = 11.sp,
                 )

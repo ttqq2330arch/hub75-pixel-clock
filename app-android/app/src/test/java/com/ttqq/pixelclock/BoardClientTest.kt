@@ -1,6 +1,7 @@
 package com.ttqq.pixelclock
 
 import com.ttqq.pixelclock.net.BoardClient
+import com.ttqq.pixelclock.net.LocalNet
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -17,8 +18,33 @@ class BoardClientTest {
         assertEquals("http://192.168.1.46", BoardClient.normalize("192.168.1.46"))
         assertEquals("http://192.168.1.46", BoardClient.normalize("  192.168.1.46  "))
         assertEquals("http://192.168.1.46", BoardClient.normalize("http://192.168.1.46/"))
-        assertEquals("https://pixelclock.local", BoardClient.normalize("https://pixelclock.local"))
         assertEquals("http://pixelclock-02.local", BoardClient.normalize("pixelclock-02.local"))
+    }
+
+    @Test
+    fun `误填 https 会被纠正成明文 http`() {
+        // 板子是 ESP32 WebServer，没有 TLS；用户填 https 会直接连接失败，
+        // 所以 normalize 必须强制纠正成 http://
+        assertEquals("http://pixelclock.local", BoardClient.normalize("https://pixelclock.local"))
+        assertEquals("http://192.168.1.46", BoardClient.normalize("https://192.168.1.46"))
+        assertEquals("http://192.168.1.46", BoardClient.normalize("https://192.168.1.46/"))
+    }
+
+    @Test
+    fun `由本机 IP 推导扫描网段`() {
+        // 扫描兜底不能写死 192.168.1.，用户家里可能是 192.168.0.x 或 10.x
+        assertEquals("192.168.1.", LocalNet.subnetOfIp("192.168.1.46"))
+        assertEquals("192.168.0.", LocalNet.subnetOfIp("192.168.0.7"))
+        assertEquals("10.0.0.", LocalNet.subnetOfIp("10.0.0.128"))
+        assertEquals("172.16.5.", LocalNet.subnetOfIp("172.16.5.9"))
+    }
+
+    @Test
+    fun `非法 IP 推不出网段`() {
+        assertEquals(null, LocalNet.subnetOfIp("not-an-ip"))
+        assertEquals(null, LocalNet.subnetOfIp("192.168.1"))
+        assertEquals(null, LocalNet.subnetOfIp("192.168.1.999"))
+        assertEquals(null, LocalNet.subnetOfIp(""))
     }
 
     @Test
