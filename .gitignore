@@ -51,3 +51,21 @@ build_log.txt
 !docs/images/*.jpg
 !docs/images/*.png
 
+# ---- Android APP（app-android/）----
+# 构建产物与本地配置不入库
+app-android/.gradle/
+app-android/build/
+app-android/app/build/
+app-android/local.properties
+app-android/.idea/
+app-android/*.iml
+app-android/app/*.iml
+# Gradle wrapper 的 jar 与二进制分发包不入库（体积大，可用 gradle wrapper 重新生成）
+app-android/gradle/wrapper/gradle-wrapper.jar
+# Android 启动图标位图（矢量 drawable 之外的密度版本）
+!app-android/app/src/main/res/mipmap-mdpi/ic_launcher.png
+!app-android/app/src/main/res/mipmap-hdpi/ic_launcher.png
+!app-android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
+!app-android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+!app-android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+

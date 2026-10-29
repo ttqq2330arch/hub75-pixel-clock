@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  自适应图标：像素时钟主题 —— 深色底 + 青绿色像素点阵时钟轮廓。
+  用矢量 drawable 而非位图，APK 更小且任意分辨率不糊。
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 背景 -->
+    <path
+        android:fillColor="#0B0D12"
+        android:pathData="M0,0h108v108h-108z" />
+
+    <!-- 像素点阵底纹（4x4 微点） -->
+    <group>
+        <path android:fillColor="#1A2230" android:pathData="M30,26h4v4h-4z" />
+        <path android:fillColor="#1A2230" android:pathData="M40,26h4v4h-4z" />
+        <path android:fillColor="#1A2230" android:pathData="M50,26h4v4h-4z" />
+        <path android:fillColor="#1A2230" android:pathData="M60,26h4v4h-4z" />
+        <path android:fillColor="#1A2230" android:pathData="M70,26h4v4h-4z" />
+        <path android:fillColor="#1A2230" android:pathData="M30,36h4v4h-4z" />
+        <path android:fillColor="#1A2230" android:pathData="M70,36h4v4h-4z" />
+        <path android:fillColor="#1A2230" android:pathData="M30,46h4v4h-4z" />
+        <path android:fillColor="#1A2230" android:pathData="M70,46h4v4h-4z" />
+        <path android:fillColor="#1A2230" android:pathData="M30,56h4v4h-4z" />
+        <path android:fillColor="#1A2230" android:pathData="M70,56h4v4h-4z" />
+        <path android:fillColor="#1A2230" android:pathData="M30,66h4v4h-4z" />
+        <path android:fillColor="#1A2230" android:pathData="M40,66h4v4h-4z" />
+        <path android:fillColor="#1A2230" android:pathData="M50,66h4v4h-4z" />
+        <path android:fillColor="#1A2230" android:pathData="M60,66h4v4h-4z" />
+        <path android:fillColor="#1A2230" android:pathData="M70,66h4v4h-4z" />
+    </group>
+
+    <!-- 时针（指向 10 点方向） -->
+    <path
+        android:fillColor="#4DD0E1"
+        android:pathData="M50,50h6v-18h-6z" />
+
+    <!-- 分针（指向 2 点方向） -->
+    <path
+        android:fillColor="#E8ECF2"
+        android:pathData="M53,53h18v6h-18z" />
+
+    <!-- 中心像素 -->
+    <path
+        android:fillColor="#FFB74D"
+        android:pathData="M50,50h8v8h-8z" />
+
+</vector>

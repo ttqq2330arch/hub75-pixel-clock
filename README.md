@@ -180,6 +180,35 @@ pio device monitor           # 115200 看启动日志
 
 ---
 
+## 📲 Android APP（原生，个人版）
+
+<p align="center">
+  <img src="docs/images/app-icon.png" alt="APP 图标" width="110">
+</p>
+
+除了网页和微信小程序，还有一套**原生 Android APP**（Kotlin + Jetpack Compose），
+可直接侧载安装，**不用上架、不用开发者资质、不用备案**。
+
+| 能力 | 说明 |
+|---|---|
+| **mDNS 自动发现** | 自动找到局域网里的板子，不用手输 IP；板子换 IP 也不用重填 |
+| 控制台 | 在线状态 / 信号强度 / 亮度滑块 / 屏幕旋转 / 表盘商店 / 固件内置表盘 / 远程动画 / WiFi 切换 |
+| 表盘库 | 板载表盘真实缩略图网格、播放、删除、推送新 `.rgb565` 表盘到 flash |
+| 表盘商店 | 6 款单帧表盘（笑脸/爱心/星星/彩虹/数字雨/火焰），点一下推上屏 |
+| 隐私 | 全程局域网直连，**不联网、不上传任何数据**、无账号无埋点 |
+
+工程在 [`app-android/`](app-android/)，构建：
+
+```bash
+cd app-android
+python build_app.py            # 一键出 APK（自动处理中文路径问题）
+python build_app.py --install  # 构建并安装到已连接设备
+```
+
+> 明文 HTTP 只对私有网段放行（`network_security_config.xml`），公网域名仍强制 HTTPS。
+
+---
+
 ## 📁 代码结构
 
 ```
@@ -202,6 +231,14 @@ miniprogram/       微信小程序控制端（原生 WXML/WXSS/JS）
   utils/api.js      WiFi HTTP 封装（含设备 IP 管理）
   utils/render.js   RGB565 ↔ canvas 渲染
   utils/ble.js      蓝牙通道（保留，固件开 BLE 后启用）
+app-android/       原生 Android APP（Kotlin + Jetpack Compose，个人版）
+  app/src/main/java/com/ttqq/pixelclock/
+    net/BoardClient.kt      板子 HTTP 客户端（全部 REST 接口封装）
+    net/BoardDiscovery.kt   mDNS 自动发现 + 网段扫描兜底
+    net/DialPreview.kt      base64 → RGB565 像素解码
+    ui/                     三页面（控制台/表盘库/设置）+ 组件 + 对话框
+  app/src/test/     单元测试 + 真板子联调测试
+  build_app.py      一键构建脚本（自动处理中文路径）
   data/faces/       本地像素表盘数据
 tools/
   gen_faces_web.py / gen_push_page_gz.py   网页→头文件生成
