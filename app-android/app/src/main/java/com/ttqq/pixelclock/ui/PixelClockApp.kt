@@ -27,6 +27,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -383,6 +384,7 @@ private fun HomePage(vm: MainViewModel, st: UiState) {
 private fun DialsPage(vm: MainViewModel, st: UiState) {
     var showUpload by remember { mutableStateOf(false) }
     var pendingDelete by remember { mutableStateOf<String?>(null) }
+    var adjusting by remember { mutableStateOf<String?>(null) }
 
     LazyColumn(
         Modifier.fillMaxSize(),
@@ -410,7 +412,7 @@ private fun DialsPage(vm: MainViewModel, st: UiState) {
                     EmptyState("板子上还没有表盘\n点右上角 + 推送一个 .rgb565 文件")
                 } else {
                     Text(
-                        "长按缩略图可删除",
+                        "点「调时钟」可拖动表盘上叠加的 HH:MM 位置",
                         color = TextLow,
                         fontSize = 11.sp,
                     )
@@ -436,6 +438,14 @@ private fun DialsPage(vm: MainViewModel, st: UiState) {
                                 Icon(Icons.Filled.PlayArrow, null, tint = androidx.compose.ui.graphics.Color.Black, modifier = Modifier.size(16.dp))
                                 Spacer(Modifier.width(4.dp))
                                 Text("播放", color = androidx.compose.ui.graphics.Color.Black, fontSize = 12.sp)
+                            }
+                            Button(
+                                onClick = { adjusting = d.name },
+                                colors = ButtonDefaults.buttonColors(containerColor = SurfaceHi),
+                            ) {
+                                Icon(Icons.Filled.Tune, null, tint = Accent, modifier = Modifier.size(16.dp))
+                                Spacer(Modifier.width(4.dp))
+                                Text("调时钟", color = Accent, fontSize = 12.sp)
                             }
                             IconButton(onClick = { pendingDelete = d.name }) {
                                 Icon(Icons.Filled.Delete, "删除", tint = Bad, modifier = Modifier.size(18.dp))
@@ -475,6 +485,25 @@ private fun DialsPage(vm: MainViewModel, st: UiState) {
             },
             containerColor = Surface,
         )
+    }
+
+    // ---------- 叠加时钟位置调整 ----------
+    adjusting?.let { name ->
+        val d = st.dials.firstOrNull { it.name == name }
+        // 表盘被删掉时收起对话框，否则会卡在一个打不开的状态
+        LaunchedEffect(d == null) {
+            if (d == null) adjusting = null
+        }
+        if (d != null) {
+            ClockAdjustDialog(
+                dial = d,
+                preview = st.previews[name],
+                onDismiss = { adjusting = null },
+                onApply = { m, ox, oy, ox2, sc, fg, ov ->
+                    vm.setDialOverlay(name, m, ox, oy, ox2, sc, fg, ov)
+                },
+            )
+        }
     }
 }
 

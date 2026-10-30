@@ -37,6 +37,45 @@ ESP32-S3 + HUB75 64×64 像素时钟的**原生 Android 客户端**。
 | WiFi 切换 | `GET/POST /wifi` | 换网络，失败自动回落配网热点 |
 | 主机名改名 | `POST /setname` | 改 mDNS 名（多板部署用） |
 | 自动发现 | mDNS `_http._tcp.` + `/24` 兜底扫描 | 板子叫 `pixelclock-02` 就找 `pixelclock-02.local` |
+| **叠加时钟位置** | `POST /dialov` | 拖动预览图，直接调表盘上叠加的 HH:MM |
+
+---
+
+## 🎯 调整表盘上的时钟位置
+
+推送到板子的表盘（远程表盘）上会叠一层 `HH:MM`，这个位置以前只能在网页里改。
+现在 APP 里直接改：**表盘库 → 每个表盘卡片 →「调时钟」**。
+
+<p align="center">
+  <img src="../docs/images/clock-adjust-ui.png" alt="调整叠加时钟界面" width="640">
+</p>
+
+> 示意图，非真机截图。底图是板子上 `cwp-girl` 表盘的真实首帧，坐标 `x=34 y=27` 也是真实参数。
+
+**怎么用**：
+
+1. 打开「表盘库」，找到要调的表盘，点「调时钟」
+2. 预览图上**直接拖动橙色框**——框就是时钟在 64×64 屏上的实际占位
+3. 松手立刻写入板子（`/dialov`），正在播放的话屏幕上马上变
+4. 下方可切：样式（经典文本 / 方块数字）、字号（大 / 小）、颜色（白 / 黑 / 黄）、叠加显示开关
+5. 「恢复默认」= 经典文本 + 居中 + 大字号 + 白色
+
+**两种样式的区别**：
+
+| 样式 | 说明 |
+|---|---|
+| 经典文本 | 5×7 点阵字体，带反色描边，浅色背景也看得清。`x = -1` 表示水平居中 |
+| 方块数字 | 两块 19×19 的数字块（小时块 + 分钟块），会盖住底图烘焙的数字并填块体色 |
+
+**几个技术坑**（改这块代码前务必知道）：
+
+- **固件两个接口字段名不一样**：`GET /diallist` 返回 `sc` / `fg` / `x2`，
+  但 `POST /dialov` 读的是 `ovs` / `ovfg` / `ox2`。写错了字号、颜色、分钟块位置会完全调不动。
+- **别边拖边写**：固件每次 `/dialov` 都把 meta 落盘到 LittleFS，
+  拖动过程中每帧写一次等于拿 flash 当橡皮擦。所以是「拖动只更新本地预览，松手写一次」。
+- **几何数值必须与固件一致**：文本宽 `5*6*scale - scale`（大 58 / 小 29）、
+  方块边长 19、钳制范围 `clampOv()`。这些都固化在 `net/DialOverlay.kt`，
+  有单测盯着，改错会立刻红。
 
 ---
 
@@ -127,6 +166,7 @@ app/src/main/java/com/ttqq/pixelclock/
     BoardClient.kt             板子 HTTP 客户端（全部 REST 接口封装）
     BoardDiscovery.kt          mDNS 自动发现（持组播锁）+ /24 兜底扫描
     LocalNet.kt                本机 WiFi IP / 网段探测（连接诊断用）
+    DialOverlay.kt             叠加时钟几何（尺寸/钳制/坐标换算，对齐固件）
     DialPreview.kt             base64 → RGB565 像素解码
   data/
     Prefs.kt                   本地偏好（板子地址 / 亮度 / 旋转）
@@ -134,6 +174,7 @@ app/src/main/java/com/ttqq/pixelclock/
     PixelClockApp.kt           三个主页面 + 底部导航
     Components.kt              通用卡片 / 滑块 / 缩略图
     Dialogs.kt                 连接 / WiFi / 亮度预设 / 推送表盘
+    ClockAdjustDialog.kt       叠加时钟位置调整（拖拽预览）
     MainViewModel.kt           状态中枢
     Theme.kt                   深色像素风主题
 ```

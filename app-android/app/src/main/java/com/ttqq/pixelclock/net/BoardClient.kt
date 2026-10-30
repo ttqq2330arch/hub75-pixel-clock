@@ -23,7 +23,7 @@ import java.util.zip.GZIPInputStream
  *   GET  /dialpreview?name=       → base64(首帧 8192B)
  *   POST /dialplay?name=
  *   POST /dialdel?name=
- *   POST /dialov?name=&mode=&ox=&oy=&x2=&sc=&fg=&ov=
+ *   POST /dialov?name=&mode=&ox=&oy=&ox2=&ovs=&ovfg=&ov=   叠加时钟（注意用 ovs/ovfg/ox2）
  *   POST /dialup?name=&off=&plain=&final=1&fps=&overlay=&burst=&ovmode=&ox=&oy=&x2=&sc=&fg=
  *   GET  /faces                   → gzip JSON（内置表盘字典）
  *   GET  /animlist                → 动画状态
@@ -249,6 +249,23 @@ class BoardClient(private var baseUrl: String) {
         request("/dialdel?name=${enc(name)}", "POST")
     }
 
+    /**
+     * 实时调整已存表盘的叠加时钟（位置 / 字号 / 颜色 / 开关）。
+     *
+     * ⚠️ **固件两个接口的字段名不一样，别写混**：
+     *   - `GET /diallist` 返回的是 `sc` / `fg` / `x2`（读取用）
+     *   - `POST /dialov` 读的是 `ovs` / `ovfg` / `ox2`（写入用）
+     *   早期版本这里错写成 sc/fg/x2，导致字号、颜色、分钟块位置完全调不动。
+     *
+     * 参数语义（固件 handleDialOv + clampOv）：
+     *   mode  0=经典 HH:MM 文本，1=方块数字（7x7 马里奥字体）
+     *   ox    mode0: X 坐标，-1=居中；mode1: 小时块 X
+     *   oy    Y 坐标
+     *   ox2   mode1: 分钟块 X（mode0 忽略）
+     *   ovs   字号 scale 1..2
+     *   ovfg  前景色 0=白 1=黑 2=黄
+     *   ov    是否叠加时钟 0/1
+     */
     suspend fun dialOverlay(
         name: String,
         mode: Int? = null, ox: Int? = null, oy: Int? = null,
@@ -259,9 +276,9 @@ class BoardClient(private var baseUrl: String) {
             mode?.let { append("&mode=").append(it) }
             ox?.let { append("&ox=").append(it) }
             oy?.let { append("&oy=").append(it) }
-            ox2?.let { append("&x2=").append(it) }
-            scale?.let { append("&sc=").append(it) }
-            fg?.let { append("&fg=").append(it) }
+            ox2?.let { append("&ox2=").append(it) }
+            scale?.let { append("&ovs=").append(it) }
+            fg?.let { append("&ovfg=").append(it) }
             overlay?.let { append("&ov=").append(it) }
         }
         request("/dialov?$q", "POST")

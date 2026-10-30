@@ -354,6 +354,36 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    // ---------------- 叠加时钟位置 ----------------
+
+    /**
+     * 调整某个表盘上叠加的 HH:MM 时钟（位置 / 样式 / 字号 / 颜色 / 开关）。
+     *
+     * 固件 /dialov 写完 meta 立即生效——如果该表盘正在播放，屏幕上马上变。
+     * 写完必须刷新列表，否则界面上还是旧的坐标。
+     */
+    fun setDialOverlay(
+        name: String,
+        mode: Int, ox: Int, oy: Int, ox2: Int,
+        scale: Int, fg: Int, overlay: Int,
+    ) {
+        viewModelScope.launch {
+            runCatching {
+                client.dialOverlay(
+                    name = name,
+                    mode = mode, ox = ox, oy = oy, ox2 = ox2,
+                    scale = scale, fg = fg, overlay = overlay,
+                )
+            }.onSuccess {
+                // 只刷新列表，不重拉全部缩略图（省 HTTP 请求，板子扛不住并发）
+                val list = runCatching { client.dialList() }.getOrDefault(emptyList())
+                _state.update { it.copy(dials = list) }
+            }.onFailure { e ->
+                toast("调整失败：${e.message ?: e::class.java.simpleName}", true)
+            }
+        }
+    }
+
     // ---------------- 杂项 ----------------
 
     fun go(screen: Screen) {

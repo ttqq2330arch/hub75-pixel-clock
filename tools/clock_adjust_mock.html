@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    width: 900px; height: 860px; background:#0B0D12;
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif; color:#E8ECF2;
+    padding: 18px;
+  }
+  .dlg {
+    background:#151922; border-radius:16px; padding:20px 22px;
+    width: 864px;
+  }
+  .title { font-size:20px; font-weight:700; margin-bottom:2px; }
+  .sub { font-size:12px; color:#5E6878; font-family:Consolas,monospace; margin-bottom:16px; }
+  .row { display:flex; gap:22px; }
+  .stage {
+    position:relative; width:512px; height:512px; flex:0 0 512px;
+    background:#000; border:1px solid #2A3240; border-radius:6px; overflow:hidden;
+  }
+  .stage img { width:512px; height:512px; image-rendering: pixelated; display:block; }
+  .grid { position:absolute; inset:0; pointer-events:none; }
+  .grid i { position:absolute; background:rgba(255,255,255,.10); }
+  .g-v { width:1px; top:0; bottom:0; }
+  .g-h { height:1px; left:0; right:0; }
+  .box {
+    position:absolute; border:3px solid #FFB74D; background:rgba(255,183,77,.18);
+  }
+  .box .lbl {
+    position:absolute; left:0; top:-20px; font-size:11px; color:#FFB74D;
+    font-family:Consolas,monospace; white-space:nowrap;
+  }
+  .side { flex:1; }
+  .hint { font-size:12px; color:#5E6878; font-family:Consolas,monospace; margin-bottom:14px; }
+  .opt { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+  .opt .lab { font-size:13px; color:#9AA5B6; width:34px; }
+  .chip { white-space:nowrap;
+    border:1px solid #2A3240; background:#1E2430; color:#9AA5B6;
+    border-radius:6px; padding:5px 11px; font-size:13px;
+  }
+  .chip.on { background:#2A7F8C; border-color:#4DD0E1; color:#E8ECF2; font-weight:700; }
+  .chip.off { color:#5E6878; }
+  .tip { font-size:11px; color:#5E6878; line-height:1.6; margin-top:14px; }
+  .acts { display:flex; gap:10px; margin-top:18px; justify-content:flex-end; align-items:center; }
+  .btn { font-size:13px; padding:7px 16px; border-radius:8px; }
+  .btn.ghost { color:#9AA5B6; }
+  .btn.primary { color:#4DD0E1; border:1px solid #2A7F8C; }
+  .cap { font-size:11px; color:#5E6878; margin-top:14px; line-height:1.7; }
+  .cap b { color:#9AA5B6; }
+</style>
+</head>
+<body>
+<div class="dlg">
+  <div class="title">调整叠加时钟</div>
+  <div class="sub">cwp-girl</div>
+
+  <div class="row">
+    <div class="stage">
+      <img src="../docs/images/dial-cwp-girl.png" alt="">
+      <div class="grid">
+        <i class="g-v" style="left:64px"></i><i class="g-v" style="left:128px"></i>
+        <i class="g-v" style="left:192px"></i><i class="g-v" style="left:256px"></i>
+        <i class="g-v" style="left:320px"></i><i class="g-v" style="left:384px"></i>
+        <i class="g-v" style="left:448px"></i>
+        <i class="g-h" style="top:64px"></i><i class="g-h" style="top:128px"></i>
+        <i class="g-h" style="top:192px"></i><i class="g-h" style="top:256px"></i>
+        <i class="g-h" style="top:320px"></i><i class="g-h" style="top:384px"></i>
+        <i class="g-h" style="top:448px"></i>
+      </div>
+      <!-- 经典文本模式：ox=34 oy=27 scale=1 → 29x7 面板像素 → 8 倍放大 -->
+      <div class="box" style="left:272px; top:216px; width:232px; height:56px;">
+        <span class="lbl">x=34 y=27</span>
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="hint">x=34 y=27</div>
+
+      <div class="opt">
+        <span class="lab">样式</span>
+        <span class="chip on">经典文本</span>
+        <span class="chip">方块数字</span>
+      </div>
+      <div class="opt">
+        <span class="lab">字号</span>
+        <span class="chip on">小</span>
+        <span class="chip">大</span>
+      </div>
+      <div class="opt">
+        <span class="lab">颜色</span>
+        <span class="chip on">白</span>
+        <span class="chip">黑</span>
+        <span class="chip">黄</span>
+      </div>
+      <div class="opt">
+        <span class="lab">叠加</span>
+        <span class="chip on">显示</span>
+        <span class="chip">隐藏</span>
+      </div>
+
+      <div class="tip">
+        提示：方块数字会盖住底图烘焙的数字；<br>
+        经典文本带描边，浅色背景也看得清。
+      </div>
+    </div>
+  </div>
+
+  <div class="acts">
+    <span class="btn ghost">恢复默认</span>
+    <span class="btn ghost">关闭</span>
+    <span class="btn primary">完成</span>
+  </div>
+
+  <div class="cap">
+    <b>示意图，非真机截图。</b>底图是板子上 <b>cwp-girl</b> 表盘的真实首帧（64×64 RGB565），
+    坐标 x=34 y=27 也是该表盘的真实参数。<br>
+    APP 里直接在预览图上拖动橙色框即可移动时钟，松开手立即写入板子。
+  </div>
+</div>
+</body>
+</html>
