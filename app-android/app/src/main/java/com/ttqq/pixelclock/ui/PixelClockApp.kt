@@ -27,6 +27,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -77,6 +78,7 @@ fun PixelClockApp(vm: MainViewModel, st: UiState) {
             when (st.screen) {
                 Screen.HOME -> HomePage(vm, st)
                 Screen.DIALS -> DialsPage(vm, st)
+                Screen.STUDIO -> StudioScreen(vm, st)
                 Screen.SETTINGS -> SettingsPage(vm, st)
             }
         }
@@ -96,6 +98,7 @@ private fun BottomBar(current: Screen, onGo: (Screen) -> Unit) {
         Row(Modifier.fillMaxWidth().padding(vertical = 6.dp)) {
             NavItem("控制台", Icons.Filled.PlayArrow, current == Screen.HOME, Modifier.weight(1f)) { onGo(Screen.HOME) }
             NavItem("表盘库", Icons.Filled.Add, current == Screen.DIALS, Modifier.weight(1f)) { onGo(Screen.DIALS) }
+            NavItem("工坊", Icons.Filled.AutoAwesome, current == Screen.STUDIO, Modifier.weight(1f)) { onGo(Screen.STUDIO) }
             NavItem("设置", Icons.Filled.Search, current == Screen.SETTINGS, Modifier.weight(1f)) { onGo(Screen.SETTINGS) }
         }
     }

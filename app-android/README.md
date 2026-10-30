@@ -2,7 +2,7 @@
 
 ESP32-S3 + HUB75 64×64 像素时钟的**原生 Android 客户端**。
 
-- **纯原生 Kotlin + Jetpack Compose**，不是 WebView 套壳
+- **原生 Kotlin + Jetpack Compose**；仅「像素工坊」页用 WebView 承载你做的 HUB75 像素图片生成器（桥接原生发往设备，非套壳）
 - **mDNS 自动发现**：开机后自动找到局域网里的板子，不用手输 IP
 - **直连局域网 HTTP**：不经过任何云端服务器，板子离线也不影响其它功能
 - **个人版**：debug 签名，直接侧载安装，不需要上架、不需要开发者资质
@@ -11,9 +11,9 @@ ESP32-S3 + HUB75 64×64 像素时钟的**原生 Android 客户端**。
 
 ## 📸 界面
 
-| 控制台 | 表盘库 | 设置 |
-|---|---|---|
-| 在线状态 / 信号强度 / 亮度 / 旋转 / 表盘商店 / WiFi 切换 | 板载表盘网格 + 缩略图 + 播放 + 删除 + 推送新表盘 | 板子地址 / 自动发现 / 主机名改名 / 关于 |
+| 控制台 | 表盘库 | 工坊 | 设置 |
+|---|---|---|---|
+| 在线状态 / 信号强度 / 亮度 / 旋转 / 表盘商店 / WiFi 切换 | 板载表盘网格 + 缩略图 + 播放 + 删除 + 推送新表盘 | 你的 HUB75 像素图片生成器（图片→像素图→直推设备） | 板子地址 / 自动发现 / 主机名改名 / 关于 |
 
 <p align="center">
   <img src="../docs/images/app-icon.png" alt="应用图标" width="120">
@@ -76,6 +76,45 @@ ESP32-S3 + HUB75 64×64 像素时钟的**原生 Android 客户端**。
 - **几何数值必须与固件一致**：文本宽 `5*6*scale - scale`（大 58 / 小 29）、
   方块边长 19、钳制范围 `clampOv()`。这些都固化在 `net/DialOverlay.kt`，
   有单测盯着，改错会立刻红。
+
+---
+
+## 🎨 像素工坊（嵌入你的网页生成器）
+
+你做的「HUB75 像素图片生成器」（图片 → 限色 + Floyd–Steinberg 抖动 → 64×64 RGB565 → 推送设备）
+直接嵌进了 APP 的**「工坊」标签页**：`assets/studio.html` 用 WebView 承载，
+「推送到表盘」按钮通过原生桥接把数据发往**当前已连接的板子**。
+
+**为什么这么集成**（而不是把像素算法重写成 Kotlin）：
+
+- 你的生成器有完整的**限色 / 抖动 / GIF 抽帧 / 分块重试**逻辑，重写成 Kotlin 极易出错又难对齐；
+- WebView 里的 `fetch` 直连局域网明文 HTTP 会撞上 **cleartext + CORS** 限制；
+- 所以只把「发往设备」那一层抽出来，换成原生 `HttpURLConnection`
+  （`net/DeviceHttp.kt` + `net/StudioBridge.kt`），复用 APP 已连接的板子地址，
+  网页的像素算法一行不动。
+
+**怎么用**：
+
+1. 底部切到「工坊」，页面和你电脑上打开的网页一模一样
+2. 拖图 / 选图（手机点「点击选择」会弹系统相册）/ 粘截图，调好参数
+3. 「表盘直推」区的**目标设备**会自动显示 APP 已连的板子（无需手填 IP）
+4. 选「立即播放（RAM）」或「存入表盘库」，点「⬆ 推送到表盘」——分块进度实时显示
+5. 「🔌 测试连接」「🖥️ 打开设备网页」也走 APP 的板子地址
+
+<p align="center">
+  <img src="../docs/images/studio-ui.png" alt="像素工坊界面" width="300">
+</p>
+
+> 示意图，非真机截图。
+
+**桥接契约**（与固件 `/dialup` 对齐，已用真板 curl 验证整条链路）：
+
+- 网页把帧编码成 **64×64 RGB565 小端**，多帧串接成字节流
+- 原生侧按 `CHUNK_MAX=4096` 字节（二进制）分块，每块把字节转 **HEX 文本**，`POST` 到
+  `http://<板子>/dialup?name=&off=&len=&fps=&overlay=&final=1`，body 为 `text/plain` 的 HEX
+- `off` 必须严格连续递增（否则固件回 `OFF GAP`），最后一块带 `final=1` 落盘写 meta
+- 收尾再 `POST /dialplay?name=` 启动播放
+- 「立即播放」走 `/pushface` + `/anim`，帧上限 8 帧；「存表盘库」走 `/dialup`，上限 64 帧
 
 ---
 
@@ -168,13 +207,18 @@ app/src/main/java/com/ttqq/pixelclock/
     LocalNet.kt                本机 WiFi IP / 网段探测（连接诊断用）
     DialOverlay.kt             叠加时钟几何（尺寸/钳制/坐标换算，对齐固件）
     DialPreview.kt             base64 → RGB565 像素解码
+    DeviceHttp.kt             桥接层阻塞式 HTTP（HEX body，对齐 /dialup）
+    StudioBridge.kt            @JavascriptInterface：网页 → 原生发往设备
+  assets/
+    studio.html                HUB75 像素图片生成器（WebView 承载，桥接推送）
   data/
     Prefs.kt                   本地偏好（板子地址 / 亮度 / 旋转）
   ui/
-    PixelClockApp.kt           三个主页面 + 底部导航
+    PixelClockApp.kt           四个主页面 + 底部导航
     Components.kt              通用卡片 / 滑块 / 缩略图
     Dialogs.kt                 连接 / WiFi / 亮度预设 / 推送表盘
     ClockAdjustDialog.kt       叠加时钟位置调整（拖拽预览）
+    StudioScreen.kt            工坊页：WebView + 桥接 + 手机选图
     MainViewModel.kt           状态中枢
     Theme.kt                   深色像素风主题
 ```

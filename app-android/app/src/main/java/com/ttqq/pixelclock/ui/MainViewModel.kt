@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.Dispatchers
 
-enum class Screen { HOME, DIALS, SETTINGS }
+enum class Screen { HOME, DIALS, STUDIO, SETTINGS }
 
 data class UiState(
     val screen: Screen = Screen.HOME,
